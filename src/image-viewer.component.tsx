@@ -8,6 +8,7 @@ import {
     TouchableHighlight,
     TouchableWithoutFeedback,
     CameraRoll,
+    StyleSheet,
     Platform
 } from 'react-native'
 import * as typings from './image-viewer.type'
@@ -440,7 +441,7 @@ export default class ImageViewer extends React.Component<typings.PropsDefine, ty
                         onLongPress={this.handleLongPress.bind(this, image)}
                         onClick={this.handleClick.bind(this)}
                         onDoubleClick={this.handleDoubleClick.bind(this)}>
-                        <Image style={Object.assign(this.styles.imageStyle, { width: width, height: height })}
+                        <Image style={StyleSheet.flatten([this.styles.imageStyle, { width: width, height: height }])}
                             source={{ uri: image.url }} />
                     </ImageZoom>
                 )
@@ -459,7 +460,7 @@ export default class ImageViewer extends React.Component<typings.PropsDefine, ty
                     case 'success':
                         return (
                             <Image key={index}
-                                style={Object.assign({}, this.styles.imageStyle, { width: width, height: height })}
+                                style={StyleSheet.flatten([this.styles.imageStyle, { width: width, height: height }])}
                                 source={{ uri: image.url }} />
                         )
                     case 'fail':
@@ -586,7 +587,7 @@ export default class ImageViewer extends React.Component<typings.PropsDefine, ty
 
         return (
             <View onLayout={this.handleLayout.bind(this)}
-                style={Object.assign({ flex: 1, overflow: 'hidden' }, this.props.style)} {...this.props.others}>
+                style={StyleSheet.flatten([{ flex: 1, overflow: 'hidden' }, this.props.style])} {...this.props.others}>
                 {childs}
             </View>
         )
